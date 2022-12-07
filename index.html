@@ -3,8 +3,38 @@
     <head>
         <meta charset="UTF-8">
         <title>Rock paper scissors</title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <div class="header">
+            <p class="title"> ROCK PAPER SCISSORS</p>
+            <a href="https://en.wikipedia.org/wiki/Rock_paper_scissors" target="_blank">Rules</a>
+        </div>
+        <div class="main">
+
+            <p class="weapon">Choose your weapon:</p>
+
+            <div class="buttons">
+                <button id="rock">rock</button>
+                <button id="paper">paper</button>
+                <button id="scissors">scissors</button>
+            </div>
+
+            <div class="choices">
+                <div id="computerChoice"></div>
+                <div id="playerChoice"></div>
+            </div>
+            <div class="texts">
+                <div id="result"></div>
+                <div id="score"></div>
+                <div id="endgame"></div>
+            </div>
+
+            <button class="restartBtn" id="restart">Play again</button>
+        </div>
+        <div class="footer">
+            <p>Project from The Odin Project course by Jan Brzozowski</p>
+        </div>
         <script src="rps.js">
         </script>
     </body>
