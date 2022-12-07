@@ -1,3 +1,4 @@
+/* WITHOUT UI
 function getComputerChoice(){
     let randomNum = Math.round(Math.random()*100);
     let num = (randomNum % 3) + 1;
@@ -50,6 +51,7 @@ function playRound(playerSelection, computerSelection){
     }
 }
 
+
 function game(){
     let computerScore = 0;
     let playerScore = 0;
@@ -85,4 +87,118 @@ function game(){
     }
     return 0;  
 }
-console.log(game());
+*/
+
+//WITH UI
+//scores
+let playerScore = 0;
+let computerScore = 0;
+
+//getting random computer's choice
+function getComputerChoice(){
+    let randomNum = Math.round(Math.random()*100);
+    let num = (randomNum % 3) + 1;
+    
+    if(num == 1){
+        document.getElementById("computerChoice").innerHTML = "Computer's choice: rock";
+        return "rock";
+    }
+    else if(num == 2){
+        document.getElementById("computerChoice").innerHTML = "Computer's choice: paper";
+        return "paper";
+    }
+    else{
+        document.getElementById("computerChoice").innerHTML = "Computer's choice: scissors";
+        return "scissors";
+    }
+}
+
+//playing round with given choices
+function playRound(playerSelection, computerSelection){
+    if((playerSelection == "rock" && computerSelection == "scissors") || (playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissors" && computerSelection == "paper")){
+        playerScore++;
+        displayScores(1, playerScore, computerScore);
+    }   
+    else if( playerSelection == computerSelection){
+        playerScore++;
+        computerScore++;
+        displayScores(0, playerScore, computerScore);
+    }
+    else{
+        computerScore++;
+        displayScores(-1, playerScore, computerScore);
+    }
+}
+
+//playing round with whatever user clicked
+function playWithPlayerChoice(choice){
+    let playerSelection = choice;
+    document.getElementById("playerChoice").innerHTML = "Your choice: " + choice;
+    playRound( playerSelection, getComputerChoice());
+}
+
+
+//defining rock, paper, scissors and restart buttons
+const rock = document.getElementById('rock');
+const paper = document.getElementById('paper');
+const scissors = document.getElementById('scissors');
+const restart = document.getElementById('restart');
+
+//adding listeners to buttons
+rock.addEventListener('click', () => playWithPlayerChoice('rock'));
+paper.addEventListener('click', () => playWithPlayerChoice('paper'));
+scissors.addEventListener('click', () => playWithPlayerChoice('scissors'));
+restart.addEventListener('click', () => newGame());
+
+//disalbing buttons if game ends
+const disableButtons = () => {
+    rock.disabled = true;
+    paper.disabled = true;
+    scissors.disabled = true;
+}
+
+//printng scores
+function displayScores(result, playerResult, computerResult){
+    if(result == 1){
+        document.getElementById("result").innerHTML = "You won that round!";
+        document.getElementById("score").innerHTML = "you " + playerResult + " - " + computerResult + " computer";
+    }
+    else if(result == 0){
+        document.getElementById("result").innerHTML = "That round was a tie! You and computer chose the same thing!";
+        document.getElementById("score").innerHTML = "you " + playerResult + " - " + computerResult + " computer";
+    }
+    else if(result == -1){
+        document.getElementById("result").innerHTML = "Computer won that round!";
+        document.getElementById("score").innerHTML = "you " + playerResult + " - " + computerResult + " computer";
+    }
+
+    //ending the game - message
+    if(playerResult == 3 && computerResult != 3){
+        document.getElementById("endgame").innerHTML = "You won the match! Congratulations! Wanna play again?";
+        disableButtons();
+
+    }
+    else if(playerResult != 3 && computerResult == 3){
+        document.getElementById("endgame").innerHTML = "Computer won the match! Redemption time?";
+        disableButtons();
+    }
+    else if(playerResult == 3 && computerResult == 3){
+        document.getElementById("endgame").innerHTML = "The match ended in a draw. Wanna see who's really better?";
+        disableButtons();
+    }
+}
+
+//restarting the game
+function newGame(){
+    playerScore = 0;
+    computerScore = 0;
+    document.getElementById("computerChoice").innerHTML = "";
+    document.getElementById("playerChoice").innerHTML = "";
+    document.getElementById("result").innerHTML = "";
+    document.getElementById("score").innerHTML = "you " + playerScore + " - " + computerScore + " computer";
+    document.getElementById("endgame").innerHTML = "";
+    rock.disabled = false;
+    paper.disabled = false;
+    scissors.disabled = false;
+}
+
