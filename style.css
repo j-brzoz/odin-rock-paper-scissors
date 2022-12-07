@@ -1,0 +1,98 @@
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+   }
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    background-color: rgb(49, 48, 48);
+    color:  #207ced;
+    font-family: "Courier New";
+    font-size: 48px;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 32%;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width: 100%;
+}
+
+a {
+    text-decoration: none;
+    color: #509cfa;
+    font-family: "Courier New";
+    font-size: 24px;
+    padding-right: 48px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(88, 86, 86);
+    color: whitesmoke;
+    font-family: "Courier New";
+    width: 100%;
+    flex: 1;
+    align-items: stretch;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    gap: 48px;
+}
+
+.weapon {
+    padding: 24px;
+    font-size: 36px;
+}
+
+button {
+    border-color: black;
+    background-color: rgb(88, 86, 86);
+    color: whitesmoke;
+    font-family: "Courier New";
+    font-size: 27px;
+    border-radius: 12px;
+    width: 180px;
+    height: 60px;
+}
+
+.choices{
+    padding-left: 24px;
+    padding-top: 24px;
+    margin-bottom: 24px;
+    font-size: 27px;
+}
+
+.texts {
+    padding-left: 24px;
+    text-align: center;
+    font-size: 36px;
+}
+
+.restartBtn {
+    margin-top: 50px;
+    align-self: center;
+    width: 120px;
+    height: 40px;
+    font-size: 18px;
+    font-size: 18px;
+}
+
+.footer {
+    background-color: rgb(67, 66, 66);
+    color: whitesmoke;
+    width: 100%;
+    font-family: "Courier New";
+    margin-top: auto;
+    text-align: center;
+}
