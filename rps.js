@@ -99,11 +99,11 @@ function getComputerChoice(){
     const randomNum = Math.round(Math.random()*100);
     const num = (randomNum % 3) + 1;
     
-    if(num == 1){
+    if(num === 1){
         document.getElementById("computerChoice").innerHTML = "Computer's choice: rock";
         return "rock";
     }
-    if(num == 2){
+    if(num === 2){
         document.getElementById("computerChoice").innerHTML = "Computer's choice: paper";
         return "paper";
     }
@@ -113,42 +113,11 @@ function getComputerChoice(){
     
 }
 
-// playing round with given choices
-function playRound(playerSelection, computerSelection){
-    if((playerSelection == "rock" && computerSelection == "scissors") || (playerSelection == "paper" && computerSelection == "rock") || (playerSelection == "scissors" && computerSelection == "paper")){
-        playerScore++;
-        displayScores(1, playerScore, computerScore);
-    }   
-    else if( playerSelection == computerSelection){
-        playerScore++;
-        computerScore++;
-        displayScores(0, playerScore, computerScore);
-    }
-    else{
-        computerScore++;
-        displayScores(-1, playerScore, computerScore);
-    }
-}
-
-// playing round with whatever user clicked
-function playWithPlayerChoice(choice){
-    const playerSelection = choice;
-    document.getElementById("playerChoice").innerHTML = `Your choice: ${  choice}`;
-    playRound( playerSelection, getComputerChoice());
-}
-
-
 // defining rock, paper, scissors and restart buttons
 const rock = document.getElementById("rock");
 const paper = document.getElementById("paper");
 const scissors = document.getElementById("scissors");
 const restart = document.getElementById("restart");
-
-// adding listeners to buttons
-rock.addEventListener("click", () => playWithPlayerChoice("rock"));
-paper.addEventListener("click", () => playWithPlayerChoice("paper"));
-scissors.addEventListener("click", () => playWithPlayerChoice("scissors"));
-restart.addEventListener("click", () => newGame());
 
 // disalbing buttons if game ends
 const disableButtons = () => {
@@ -159,33 +128,57 @@ const disableButtons = () => {
 
 // printng scores
 function displayScores(result, playerResult, computerResult){
-    if(result == 1){
+    if(result === 1){
         document.getElementById("result").innerHTML = "You won that round!";
         document.getElementById("score").innerHTML = `you ${  playerResult  } - ${  computerResult  } computer`;
     }
-    else if(result == 0){
+    else if(result === 0){
         document.getElementById("result").innerHTML = "That round was a tie! You and computer chose the same thing!";
         document.getElementById("score").innerHTML = `you ${  playerResult  } - ${  computerResult  } computer`;
     }
-    else if(result == -1){
+    else if(result === -1){
         document.getElementById("result").innerHTML = "Computer won that round!";
         document.getElementById("score").innerHTML = `you ${  playerResult  } - ${  computerResult  } computer`;
     }
 
     // ending the game - message
-    if(playerResult == 3 && computerResult != 3){
+    if(playerResult === 3 && computerResult !== 3){
         document.getElementById("endgame").innerHTML = "You won the match! Congratulations! Wanna play again?";
         disableButtons();
 
     }
-    else if(playerResult != 3 && computerResult == 3){
+    else if(playerResult !== 3 && computerResult === 3){
         document.getElementById("endgame").innerHTML = "Computer won the match! Redemption time?";
         disableButtons();
     }
-    else if(playerResult == 3 && computerResult == 3){
+    else if(playerResult === 3 && computerResult === 3){
         document.getElementById("endgame").innerHTML = "The match ended in a draw. Wanna see who's really better?";
         disableButtons();
     }
+}
+
+// playing round with given choices
+function playRound(playerSelection, computerSelection){
+    if((playerSelection === "rock" && computerSelection === "scissors") || (playerSelection === "paper" && computerSelection === "rock") || (playerSelection === "scissors" && computerSelection === "paper")){
+        playerScore += 1;
+        displayScores(1, playerScore, computerScore);
+    }   
+    else if( playerSelection === computerSelection){
+        playerScore += 1;
+        computerScore += 1;
+        displayScores(0, playerScore, computerScore);
+    }
+    else{
+        computerScore += 1;
+        displayScores(-1, playerScore, computerScore);
+    }
+}
+
+// playing round with whatever user clicked
+function playWithPlayerChoice(choice){
+    const playerSelection = choice;
+    document.getElementById("playerChoice").innerHTML = `Your choice: ${  choice}`;
+    playRound( playerSelection, getComputerChoice());
 }
 
 // restarting the game
@@ -202,3 +195,8 @@ function newGame(){
     scissors.disabled = false;
 }
 
+// adding listeners to buttons
+rock.addEventListener("click", () => playWithPlayerChoice("rock"));
+paper.addEventListener("click", () => playWithPlayerChoice("paper"));
+scissors.addEventListener("click", () => playWithPlayerChoice("scissors"));
+restart.addEventListener("click", () => newGame());
